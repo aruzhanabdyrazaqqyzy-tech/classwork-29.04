@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container{
+            box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 10px; 
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+        }
+        .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .search{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 5px 10px;
+        }
+        input{
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 8px;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <span>Task Inbox <img src="arrow_down.png" width="10px"></span>
+            <img src="icons.png" width="70px">
+        </div>
+
+        <div class="search">
+            <img src="icon_plus.png" alt="icon_plus" width="15px">
+            <input id="taskInput" placeholder="New task">
+        </div>
+
+        <div id="list"></div>
+    </div>
+
+<script>
+    const input = document.getElementById("taskInput");
+    const list = document.getElementById("list");
+
+    input.addEventListener("keypress", function(e){
+        if(e.key === "Enter" && input.value.trim() !== ""){
+            const item = document.createElement("div");
+            item.style.display = "flex";
+            item.style.justifyContent = "space-between";
+            item.style.alignItems = "center";
+            item.style.padding = "8px";
+            item.style.borderBottom = "1px solid #ddd";
+
+            const text = document.createElement("span");
+            text.textContent = input.value;
+
+            const del = document.createElement("button");
+            del.textContent = "x";
+            del.style.border = "none";
+            del.style.background = "transparent";
+            del.style.cursor = "pointer";
+
+            del.onclick = () => item.remove();
+
+            item.appendChild(text);
+            item.appendChild(del);
+            list.appendChild(item);
+
+            input.value = "";
+        }
+    });
+</script>
+
+</body>
+</html>
